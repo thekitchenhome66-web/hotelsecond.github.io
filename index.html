@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azure Bay Resort</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f5f5f5;color:#333;overflow-x:hidden;scroll-behavior:smooth;}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:grid;
+grid-template-columns:1fr 2fr 1fr;
+align-items:center;
+padding:12px 20px;
+background:rgba(0,0,0,0.8);
+color:white;
+z-index:999;
+}
+
+.logo{font-size:18px;font-weight:600;}
+
+.nav-links{
+text-align:center;
+font-size:14px;
+}
+
+.nav-links a{
+margin:0 8px;
+color:white;
+text-decoration:none;
+}
+
+.nav-btn{
+text-align:right;
+}
+
+.nav-btn a{
+background:#d4af37;
+padding:8px 14px;
+border-radius:18px;
+color:black;
+text-decoration:none;
+font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
+}
+
+.hero video{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+z-index:-1;
+}
+
+.hero-content h1{font-size:48px;margin-bottom:10px;}
+.hero-content p{font-size:18px;margin-bottom:25px;}
+
+.hero-content button{
+padding:14px 30px;
+background:#d4af37;
+border:none;
+border-radius:30px;
+font-size:16px;
+cursor:pointer;
+}
+
+/* PARALLAX SECTION */
+
+.parallax{
+background-image:url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb");
+height:300px;
+background-attachment:fixed;
+background-position:center;
+background-size:cover;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:32px;
+}
+
+/* SECTIONS */
+
+section{padding:80px 8%;}
+
+h2{text-align:center;margin-bottom:40px;font-size:32px;}
+
+/* ROOM CARDS */
+
+.rooms{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.room{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.room:hover{transform:translateY(-6px);}
+
+.room img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.room-content{padding:15px;}
+
+.book-btn{
+display:inline-block;
+margin-top:8px;
+background:#d4af37;
+padding:8px 16px;
+border-radius:20px;
+text-decoration:none;
+color:black;
+font-size:14px;
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:10px;
+}
+
+.gallery img{
+width:100%;
+height:170px;
+object-fit:cover;
+border-radius:8px;
+transition:0.3s;
+}
+
+.gallery img:hover{transform:scale(1.06);}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+text-align:center;
+}
+
+.stat{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.stat h3{
+font-size:32px;
+color:#d4af37;
+}
+
+/* MAP */
+
+.map iframe{
+width:100%;
+height:300px;
+border:none;
+border-radius:10px;
+}
+
+/* BOOKING BAR */
+
+.booking-bar{
+position:fixed;
+bottom:0;
+width:100%;
+background:#111;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 20px;
+z-index:1000;
+}
+
+.booking-bar button{
+background:#d4af37;
+border:none;
+padding:10px 18px;
+border-radius:20px;
+cursor:pointer;
+}
+
+/* BOOKING MODAL */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.modal-content{
+background:white;
+padding:25px;
+border-radius:10px;
+width:300px;
+text-align:center;
+}
+
+.modal-content input{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">Azure Bay</div>
+
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#rooms">Rooms</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Location</a>
+</div>
+
+<div class="nav-btn">
+<a href="#rooms">See Rooms</a>
+</div>
+
+</nav>
+
+<section class="hero">
+
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-luxury-resort-6531/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+<h1>Azure Bay Resort</h1>
+<p>Luxury Escape By The Ocean</p>
+<button onclick="openBooking()">Book Your Stay</button>
+</div>
+
+</section>
+
+<div class="parallax">
+Luxury Experience
+</div>
+
+<section id="rooms">
+
+<h2>Our Rooms</h2>
+
+<div class="rooms">
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2">
+<div class="room-content">
+<h3>Ocean Suite</h3>
+<p>$220 / night</p>
+<a class="book-btn" onclick="openBooking()">Book</a>
+</div>
+</div>
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+<div class="room-content">
+<h3>Deluxe Room</h3>
+<p>$180 / night</p>
+<a class="book-btn" onclick="openBooking()">Book</a>
+</div>
+</div>
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4">
+<div class="room-content">
+<h3>Presidential Villa</h3>
+<p>$450 / night</p>
+<a class="book-btn" onclick="openBooking()">Book</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="gallery">
+
+<h2>Hotel Gallery</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+<img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb">
+<img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d">
+<img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4">
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Our Experience</h2>
+
+<div class="stats">
+
+<div class="stat">
+<h3 id="s1">0</h3>
+<p>Luxury Rooms</p>
+</div>
+
+<div class="stat">
+<h3 id="s2">0</h3>
+<p>Happy Guests</p>
+</div>
+
+<div class="stat">
+<h3 id="s3">0</h3>
+<p>5 Star Reviews</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact" class="map">
+
+<h2>Find Us</h2>
+
+<iframe src="https://maps.google.com/maps?q=maldives&t=&z=5&ie=UTF8&iwloc=&output=embed"></iframe>
+
+</section>
+
+<footer>
+© 2026 Azure Bay Resort
+</footer>
+
+<div class="booking-bar">
+<span>Ready to book your stay?</span>
+<button onclick="openBooking()">Book Now</button>
+</div>
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<h3>Book Your Stay</h3>
+
+<input placeholder="Your Name">
+<input placeholder="Email">
+<input placeholder="Dates">
+
+<button>Send Request</button>
+
+</div>
+
+</div>
+
+<script>
+
+function openBooking(){
+document.getElementById("modal").style.display="flex";
+}
+
+window.onclick=function(e){
+let m=document.getElementById("modal");
+if(e.target==m){m.style.display="none";}
+}
+
+/* COUNTER */
+
+function counter(id,end){
+
+let el=document.getElementById(id);
+let i=0;
+
+let timer=setInterval(function(){
+
+i++;
+el.innerText=i;
+
+if(i>=end){clearInterval(timer);}
+
+},20);
+
+}
+
+counter("s1",120);
+counter("s2",5400);
+counter("s3",320);
+
+</script>
+
+</body>
+</html>
