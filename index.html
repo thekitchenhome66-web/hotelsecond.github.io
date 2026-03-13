@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azure Bay Resort</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f5f5f5;color:#333;scroll-behavior:smooth;}
+
+/* NAVBAR */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+padding:12px 18px;
+background:rgba(0,0,0,0.9);
+color:white;
+z-index:1000;
+}
+
+.logo{font-weight:600;font-size:18px;}
+
+.nav-links{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+opacity:0.9;
+font-size:14px;
+}
+
+.nav-links a:hover{opacity:1;}
+
+.nav-btn{
+flex-shrink:0;
+}
+
+.nav-btn a{
+background:#d4af37;
+padding:8px 16px;
+border-radius:25px;
+color:black;
+text-decoration:none;
+font-size:13px;
+font-weight:500;
+white-space:nowrap;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
+}
+
+.slide{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+transition:opacity 1s;
+}
+
+.slide.active{opacity:1;}
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:650px;
+padding:20px;
+}
+
+.hero h1{font-size:42px;margin-bottom:10px;}
+.hero p{font-size:18px;margin-bottom:25px;}
+
+.hero button{
+padding:14px 30px;
+background:#d4af37;
+border:none;
+border-radius:30px;
+font-size:16px;
+cursor:pointer;
+}
+
+/* SECTIONS */
+section{padding:90px 8%;}
+h2{text-align:center;margin-bottom:40px;font-size:32px;}
+
+/* ROOMS */
+.rooms{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:22px;
+}
+
+.room{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+cursor:pointer;
+transition:.25s;
+}
+
+.room:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+
+.room img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.room-content{
+padding:16px;
+}
+
+/* GALLERY */
+.gallery-slider{
+display:flex;
+overflow-x:auto;
+gap:14px;
+scroll-snap-type:x mandatory;
+}
+
+.gallery-slider img{
+height:220px;
+border-radius:10px;
+scroll-snap-align:center;
+}
+
+.gallery-slider::-webkit-scrollbar{display:none;}
+
+/* MAP */
+.map iframe{
+width:100%;
+height:340px;
+border:none;
+border-radius:10px;
+}
+
+/* FLOATING BOOK BUTTON */
+.floating-book{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#d4af37;
+padding:14px 20px;
+border-radius:30px;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+z-index:999;
+}
+
+/* ROOM MODAL */
+.room-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+
+.room-box{
+background:white;
+padding:24px;
+border-radius:10px;
+width:340px;
+text-align:center;
+}
+
+.room-box img{
+width:100%;
+border-radius:8px;
+margin-bottom:12px;
+}
+
+/* BOOKING MODAL */
+.booking-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+align-items:center;
+justify-content:center;
+z-index:3000;
+}
+
+.booking-box{
+background:white;
+padding:24px;
+border-radius:10px;
+width:320px;
+}
+
+.booking-box input{
+width:100%;
+padding:10px;
+margin:6px 0;
+}
+
+.booking-box button{
+margin-top:8px;
+width:100%;
+padding:10px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+}
+
+.email{background:#d4af37;}
+.whatsapp{background:#25D366;color:white;}
+
+/* FOOTER */
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:24px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">Azure Bay</div>
+
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#rooms">Rooms</a>
+<a href="#gallery">Gallery</a>
+<a href="#location">Location</a>
+</div>
+
+<div class="nav-btn">
+<a href="#rooms">See Rooms</a>
+</div>
+</nav>
+
+<section class="hero">
+
+<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb');"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4');"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85');"></div>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+<h1>Azure Bay Resort</h1>
+<p>Luxury Escape By The Ocean</p>
+<a href="#rooms"><button>Explore Rooms</button></a>
+</div>
+
+</section>
+
+<section id="rooms">
+
+<h2>Our Rooms</h2>
+
+<div class="rooms">
+
+<div class="room" onclick="showRoom('Ocean Suite','https://images.unsplash.com/photo-1560448204-e02f11c3d0e2')">
+<img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2" loading="lazy" alt="Ocean Suite">
+<div class="room-content">
+<h3>Ocean Suite</h3>
+<p>$220 / night</p>
+</div>
+</div>
+
+<div class="room" onclick="showRoom('Deluxe Room','https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" loading="lazy" alt="Deluxe Room">
+<div class="room-content">
+<h3>Deluxe Room</h3>
+<p>$180 / night</p>
+</div>
+</div>
+
+<div class="room" onclick="showRoom('Presidential Villa','https://images.unsplash.com/photo-1560185127-6ed189bf02f4')">
+<img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4" loading="lazy" alt="Presidential Villa">
+<div class="room-content">
+<h3>Presidential Villa</h3>
+<p>$450 / night</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="gallery">
+<h2>Hotel Gallery</h2>
+
+<div class="gallery-slider">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" loading="lazy">
+<img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb" loading="lazy">
+<img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d" loading="lazy">
+<img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" loading="lazy">
+</div>
+</section>
+
+<section id="location">
+<h2>Find Us</h2>
+<div class="map">
+<iframe src="https://maps.google.com/maps?q=maldives&t=&z=5&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+</section>
+
+<footer>
+© 2026 Azure Bay Resort
+</footer>
+
+<div class="floating-book" onclick="openBooking()">Book Now</div>
+
+<div class="room-modal" id="roomModal">
+<div class="room-box">
+<img id="roomImg">
+<h3 id="roomTitle"></h3>
+<button onclick="openBooking()">Book This Room</button>
+</div>
+</div>
+
+<div class="booking-modal" id="bookingModal">
+<div class="booking-box">
+<h3>Book Room</h3>
+<input id="name" placeholder="Your Name">
+<input id="guests" placeholder="Guests">
+<input id="dates" placeholder="Dates">
+<button class="email" onclick="sendEmail()">Send Email</button>
+<button class="whatsapp" onclick="sendWhatsApp()">WhatsApp</button>
+</div>
+</div>
+
+<script>
+
+let slides=document.querySelectorAll(".slide");
+slides.forEach(s=>s.classList.remove("active"));
+slides[0].classList.add("active");
+
+let index=0;
+setInterval(()=>{
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
+},4000);
+
+let selectedRoom="General Booking";
+
+function showRoom(name,img){
+selectedRoom=name;
+document.getElementById("roomTitle").innerText=name;
+document.getElementById("roomImg").src=img;
+document.getElementById("roomModal").style.display="flex";
+}
+
+function openBooking(){
+document.getElementById("bookingModal").style.display="flex";
+}
+
+function buildMessage(){
+let name=document.getElementById("name").value;
+let guests=document.getElementById("guests").value;
+let dates=document.getElementById("dates").value;
+return "Booking Request:%0ARoom:"+selectedRoom+"%0AName:"+name+"%0AGuests:"+guests+"%0ADates:"+dates;
+}
+
+function sendEmail(){
+window.location.href="mailto:hotel@email.com?subject=Room Booking&body="+buildMessage();
+}
+
+function sendWhatsApp(){
+window.open("https://wa.me/1234567890?text="+buildMessage());
+}
+
+window.addEventListener("click",function(e){
+let roomModal=document.getElementById("roomModal");
+let bookingModal=document.getElementById("bookingModal");
+
+if(e.target===roomModal) roomModal.style.display="none";
+if(e.target===bookingModal) bookingModal.style.display="none";
+});
+</script>
+
+</body>
+</html>
